@@ -20,7 +20,7 @@ import Post from './components/Post.js'
 import Login from './components/Login.js'
 
 
-var api_path = "http://gobberapi.carlssonjesper.com"
+var api_path = "https://gobberapi.carlssonjesper.com"
 
 class Main extends Component {
     constructor(props, context) {
