@@ -37,7 +37,7 @@ class Main extends Component {
             transports:["polling"]
         }
 
-        this.socket = socketIOClient("http://localhost:4001")
+        this.socket = socketIOClient("http://178.62.52.134:4999")
         
         this.socket.on('allPosts', function (data) {
             addMessage(data); 
@@ -121,7 +121,7 @@ class Main extends Component {
         formBody.push(encodedKey + "=" + encodedValue);
       }
       formBody = formBody.join("&");
-          axios.get("http://localhost:4001/posts")
+          axios.get("http://178.62.52.134:4999/posts")
           .then(function (res) {
               console.log(res);
               this.setState({

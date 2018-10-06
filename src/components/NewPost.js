@@ -77,7 +77,7 @@ class NewPost extends React.Component {
     }
     componentWillMount() { 
       //Get hashtags for autocomplete
-      fetch('http://localhost:4001/fetchhashtags', {
+      fetch('http://localhost:4999/fetchhashtags', {
           method: 'GET',
           headers: {'Content-type': 'application/x-www-form-urlencoded;charset=UTF-8'},
       })
@@ -156,7 +156,7 @@ class NewPost extends React.Component {
         formBody = formBody.join("&");
         if (this.state.nickValue !== "" && this.state.textValue !== ""
         && this.state.passValue !== "awdfwajwajiowaji25925929292") {
-            fetch('http://localhost:4001/newpost', {
+            fetch('http://localhost:4999/newpost', {
                 method: 'post',
                 body: data 
               })
