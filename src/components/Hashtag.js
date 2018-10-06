@@ -3,6 +3,8 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import Post from './Post.js';
 
+var api_path = "http://gobberapi.carlssonjesper.com"
+
 class HashtagX extends React.Component {
     constructor(props) {
         super(props);
@@ -18,7 +20,7 @@ class HashtagX extends React.Component {
           openDialog : true
         })
         
-        var get_url = "http://localhost:4001/posts?hashtag="+this.state.tag;
+        var get_url = api_path + "/posts?hashtag="+this.state.tag;
         fetch(get_url, {
             method: 'GET',
             headers: {'Content-type': 'application/x-www-form-urlencoded;charset=UTF-8'},

@@ -19,6 +19,9 @@ import fetch from 'isomorphic-fetch';
 import Post from './components/Post.js'
 import Login from './components/Login.js'
 
+
+var api_path = "http://gobberapi.carlssonjesper.com"
+
 class Main extends Component {
     constructor(props, context) {
         super(props, context);
@@ -30,15 +33,7 @@ class Main extends Component {
         };
 
         
-        var options = {
-            forceNew : true,
-            timeout: 10000,
-            autoConnect: true,
-            transports:["polling"]
-        }
-
-        this.socket = socketIOClient("http://178.62.52.134:4999")
-        
+        this.socket = socketIOClient(api_path)
         this.socket.on('allPosts', function (data) {
             addMessage(data); 
         });
@@ -46,7 +41,7 @@ class Main extends Component {
         this.socket.on('newPosts', function (data) {
             updates(data);
         });
-
+        
         const updates = data => {
             console.log(data);
             var id = this.socket.id;
@@ -121,7 +116,7 @@ class Main extends Component {
         formBody.push(encodedKey + "=" + encodedValue);
       }
       formBody = formBody.join("&");
-          axios.get("http://178.62.52.134:4999/posts")
+          axios.get(api_path+"/posts")
           .then(function (res) {
               console.log(res);
               this.setState({

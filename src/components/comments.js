@@ -14,6 +14,7 @@ import Post from './Post.js';
 import HashtagX from './Hashtag.js';
 
 const reactStringReplace = require('react-string-replace');
+var api_path = "http://gobberapi.carlssonjesper.com"
 
 /* This class models all the comments of a single point */
 export default class Comments extends React.Component {
@@ -53,7 +54,7 @@ export default class Comments extends React.Component {
           formBody.push(encodedKey + "=" + encodedValue);
         }
         formBody = formBody.join("&");
-        fetch('http://localhost:4001/fetchcomments', {
+        fetch(api_path + '/fetchcomments', {
             method: 'POST',
             headers: {'Content-type': 'application/x-www-form-urlencoded;charset=UTF-8'},
             body: formBody
@@ -118,7 +119,7 @@ export default class Comments extends React.Component {
         }
         formBody = formBody.join("&");
             if (this.state.textValue !== "") {
-                fetch('http://localhost:4001/newcomment', {
+                fetch(api_path + '/newcomment', {
                     method: 'post',
                     headers: {'Content-type': 'application/x-www-form-urlencoded;charset=UTF-8'},
                     body: formBody

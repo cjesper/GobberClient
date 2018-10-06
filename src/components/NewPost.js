@@ -7,6 +7,8 @@ import OwnCamera from './Camera.js'
 import {Row, Col} from 'react-flexbox-grid';
 import AutoComplete from 'material-ui/AutoComplete';
 
+var api_path = "http://gobberapi.carlssonjesper.com"
+
 class NewPost extends React.Component {
     constructor(props) {
       super(props);
@@ -77,7 +79,7 @@ class NewPost extends React.Component {
     }
     componentWillMount() { 
       //Get hashtags for autocomplete
-      fetch('http://localhost:4999/fetchhashtags', {
+      fetch(api_path + '/fetchhashtags', {
           method: 'GET',
           headers: {'Content-type': 'application/x-www-form-urlencoded;charset=UTF-8'},
       })
@@ -156,7 +158,7 @@ class NewPost extends React.Component {
         formBody = formBody.join("&");
         if (this.state.nickValue !== "" && this.state.textValue !== ""
         && this.state.passValue !== "awdfwajwajiowaji25925929292") {
-            fetch('http://localhost:4999/newpost', {
+            fetch(api_path + '/newpost', {
                 method: 'post',
                 body: data 
               })
