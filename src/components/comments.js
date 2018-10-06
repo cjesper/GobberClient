@@ -14,7 +14,7 @@ import Post from './Post.js';
 import HashtagX from './Hashtag.js';
 
 const reactStringReplace = require('react-string-replace');
-var api_path = "http://gobberapi.carlssonjesper.com"
+var api_path = "https://gobberapi.carlssonjesper.com"
 
 /* This class models all the comments of a single point */
 export default class Comments extends React.Component {

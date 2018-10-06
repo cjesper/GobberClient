@@ -3,7 +3,7 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import Post from './Post.js';
 
-var api_path = "http://gobberapi.carlssonjesper.com"
+var api_path = "https://gobberapi.carlssonjesper.com"
 
 class HashtagX extends React.Component {
     constructor(props) {
