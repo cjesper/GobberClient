@@ -1,0 +1,200 @@
+'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/var/www/GobBlog/client/src/components/comments.js';var _react = require('react');var _react2 = _interopRequireDefault(_react);
+var _Dialog = require('material-ui/Dialog');var _Dialog2 = _interopRequireDefault(_Dialog);
+var _FlatButton = require('material-ui/FlatButton');var _FlatButton2 = _interopRequireDefault(_FlatButton);
+var _RaisedButton = require('material-ui/RaisedButton');var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+var _TextField = require('material-ui/TextField');var _TextField2 = _interopRequireDefault(_TextField);
+var _Badge = require('material-ui/Badge');var _Badge2 = _interopRequireDefault(_Badge);
+var _comment = require('./comment.js');var _comment2 = _interopRequireDefault(_comment);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+/* This class models all the comments of a single point */
+class Comments extends _react2.default.Component {
+  constructor(props) {
+    super(props);this.
+
+
+
+
+
+
+
+
+
+
+
+
+
+    handleOpen = () => {
+      this.setState({ open: true });
+
+      /* Fetch all comments belonging to this post */
+      var details = {
+        'id': this.state.parentID };
+
+      var formBody = [];
+      for (var property in details) {
+        var encodedKey = encodeURIComponent(property);
+        var encodedValue = encodeURIComponent(details[property]);
+        formBody.push(encodedKey + "=" + encodedValue);
+      }
+      formBody = formBody.join("&");
+      fetch('/fetchcomments', {
+        method: 'POST',
+        headers: { 'Content-type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+        body: formBody }).
+
+      then(function (res) {
+        return res.json();
+      }).
+      then(function (json) {
+        this.setState({ comments: json });
+      }.bind(this)).
+      catch(error => {
+        console.log(error);
+      });
+    };this.
+
+    handleClose = () => {
+      this.setState({ open: false });
+    };this.
+
+    openDialog = () => {
+      this.setState({
+        openDialog: true });
+
+    };this.
+
+    closeDialog = () => {
+      this.setState({
+        openDialog: false });
+
+    };this.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    leaveComment = () => {
+      var details = {
+        'nick': this.state.nickValue,
+        'comment': this.state.textValue,
+        'id': this.state.parentID,
+        'timeStamp': Date.now() / 1000 };
+
+
+      var formBody = [];
+      for (var property in details) {
+        var encodedKey = encodeURIComponent(property);
+        var encodedValue = encodeURIComponent(details[property]);
+        formBody.push(encodedKey + "=" + encodedValue);
+      }
+      formBody = formBody.join("&");
+      if (this.state.textValue !== "") {
+        fetch('/newcomment', {
+          method: 'post',
+          headers: { 'Content-type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+          body: formBody });
+
+        var oldcomments = this.state.comments;
+        var newComment = {
+          nick: this.state.nickValue,
+          text: this.state.textValue,
+          parentID: this.state.parentID,
+          color: this.state.parentColor,
+          timeStamp: Date.now() / 1000 };
+
+        oldcomments.splice(0, 0, newComment);
+        this.openDialog();
+        setTimeout(this.closeDialog, 1000);
+        this.setState({
+          comments: oldcomments,
+          textValue: "",
+          nickValue: "" });
+
+      } else {
+        console.log("Nothing to send!");
+      }
+    };this.state = { open: false, comments: [], parentID: this.props.id_prop, parentColor: this.props.color_prop, textValue: "", nickValue: "", openDialog: false };this.handleTextFieldChange = this.handleTextFieldChange.bind(this);this.handleNickFieldChange = this.handleNickFieldChange.bind(this);}componentDidMount() {}handleNickFieldChange(e) {this.setState({ nickValue: e.target.value });}handleTextFieldChange(e) {this.setState({ textValue: e.target.value });} /* Post a comment */
+
+  render() {
+    const actions = [
+    _react2.default.createElement(_FlatButton2.default, {
+      label: 'Done',
+      primary: true,
+      keyboardFocused: true,
+      onClick: this.handleClose, __source: { fileName: _jsxFileName, lineNumber: 131 }, __self: this })];
+
+
+
+    const comments = this.state.comments;
+    const listComments = comments.map(comment =>
+    _react2.default.createElement(_comment2.default, { key: comment._id, comment_prop: comment.text,
+      nick_prop: comment.nick, color_prop: this.state.parentColor,
+      timestamp_prop: comment.timeStamp, __source: { fileName: _jsxFileName, lineNumber: 141 }, __self: this }));
+
+
+    const style = {
+      padding: "2px",
+      width: "100%",
+      margin: 0 };
+
+
+    return (
+
+      _react2.default.createElement('div', { __source: { fileName: _jsxFileName, lineNumber: 154 }, __self: this },
+        _react2.default.createElement(_RaisedButton2.default, { style: { marginLeft: 15 }, label: 'Comments', onClick: this.handleOpen, __source: { fileName: _jsxFileName, lineNumber: 155 }, __self: this }),
+        _react2.default.createElement(_Badge2.default, {
+          badgeStyle: { top: "0px", right: "28px", margin: "0" },
+          badgeContent: this.state.comments.length,
+          primary: true, __source: { fileName: _jsxFileName, lineNumber: 156 }, __self: this }),
+
+        _react2.default.createElement(_Dialog2.default, {
+            title: 'Comments',
+            actions: actions,
+            modal: false,
+            autoDetectWindowHeigh: true,
+            autoDetectBodyContent: true,
+            autoScrollBodyContent: true,
+            repositionOnUpdate: true,
+            open: this.state.open,
+            bodyStyle: { padding: 2 },
+            titleStyle: { padding: 2 },
+            contentStyle: { padding: 2 },
+            fullWidth: 'true',
+            onRequestClose: this.handleClose, __source: { fileName: _jsxFileName, lineNumber: 161 }, __self: this },
+
+          _react2.default.createElement('div', { style: style, __source: { fileName: _jsxFileName, lineNumber: 176 }, __self: this },
+            _react2.default.createElement(_TextField2.default, { value: this.state.nickValue, multiLine: false, onChange: this.handleNickFieldChange, hintText: 'Nick', __source: { fileName: _jsxFileName, lineNumber: 177 }, __self: this }),
+
+            _react2.default.createElement(_TextField2.default, { value: this.state.textValue, multiLine: true, onChange: this.handleTextFieldChange, hintText: 'Give comment', __source: { fileName: _jsxFileName, lineNumber: 179 }, __self: this }),
+
+            _react2.default.createElement(_RaisedButton2.default, { onClick: this.leaveComment, label: 'Send', __source: { fileName: _jsxFileName, lineNumber: 181 }, __self: this }, ' '),
+            listComments,
+            _react2.default.createElement(_Dialog2.default, {
+                title: 'Info',
+                modal: true,
+                open: this.state.openDialog,
+                onRequestClose: this.closeDialog, __source: { fileName: _jsxFileName, lineNumber: 183 }, __self: this }, 'Sent comment!')))));
+
+
+
+
+
+
+
+  }}exports.default = Comments;
+
+
+
+Comments.defaultProps = {
+  commentProp: ["Hej", "Pa", "Dig"] };

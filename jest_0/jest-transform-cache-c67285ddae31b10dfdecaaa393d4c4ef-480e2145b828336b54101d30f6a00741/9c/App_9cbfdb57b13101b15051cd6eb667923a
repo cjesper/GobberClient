@@ -1,0 +1,105 @@
+'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/var/www/GobBlog/client/src/App.js';var _react = require('react');var _react2 = _interopRequireDefault(_react);
+var _socket = require('socket.io-client');var _socket2 = _interopRequireDefault(_socket);
+require('./App.css');
+var _MuiThemeProvider = require('material-ui/styles/MuiThemeProvider');var _MuiThemeProvider2 = _interopRequireDefault(_MuiThemeProvider);
+var _welcomeBar = require('./components/welcomeBar.js');var _welcomeBar2 = _interopRequireDefault(_welcomeBar);
+var _NewPost = require('./components/NewPost.js');var _NewPost2 = _interopRequireDefault(_NewPost);
+var _Post = require('./components/Post.js');var _Post2 = _interopRequireDefault(_Post);
+var _isomorphicFetch = require('isomorphic-fetch');var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+class App extends _react.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            postList: [],
+            endpoint: "127.0.0.1" };
+
+
+        var options = {
+            forceNew: true,
+            timeout: 10000,
+            autoConnect: true,
+            transports: ["polling"] };
+
+
+        this.socket = (0, _socket2.default)("/", options);
+
+        this.socket.on('allPosts', function (data) {
+            console.log("Got Data");
+            addMessage(data);
+        });
+
+        const addMessage = data => {
+            console.log("Got message");
+            this.setState({
+                postList: data });
+
+            this.forceUpdate();
+        };
+    }
+
+    componentDidMount() {
+
+        var myHeaders = new Headers();
+
+        var myInit = {
+            method: 'GET',
+            headers: myHeaders,
+            mode: 'cors',
+            cache: 'default' };
+
+
+        var myRequest = new Request('/posts', myInit);
+
+        var query = {
+            hashtag: "" };
+
+        var formBody = [];
+        for (var property in query) {
+            var encodedKey = encodeURIComponent(property);
+            var encodedValue = encodeURIComponent(query[property]);
+            formBody.push(encodedKey + "=" + encodedValue);
+        }
+        formBody = formBody.join("&");
+
+        (0, _isomorphicFetch2.default)('/posts', {
+            method: 'GET',
+            headers: { 'Content-type': 'application/x-www-form-urlencoded;charset=UTF-8' } }).
+
+        then(function (res) {
+            return res.json();
+        }).
+        then(function (json) {
+            this.setState({
+                postList: json });
+
+        }.bind(this)).
+        catch(error => {
+            console.log(error);
+        });
+
+    }
+
+
+    render() {
+        const posts = this.state.postList;
+        const listPosts = posts.map(post =>
+        _react2.default.createElement(_Post2.default, { key: post._id, nickProp: post.nick, textProp: post.text, colorProp: post.color,
+            J_upvoteProp: post.Jvotes, G_upvoteProp: post.Gvotes,
+            commentProp: post.comments, socketProp: this.state.socket,
+            id_prop: post._id, ts_prop: post.timeStamp, image_prop: post.img, hashtagProp: this.state.hashtag, __source: { fileName: _jsxFileName, lineNumber: 87 }, __self: this }));
+
+
+        return (
+            _react2.default.createElement(_MuiThemeProvider2.default, { __source: { fileName: _jsxFileName, lineNumber: 94 }, __self: this },
+                _react2.default.createElement('div', { style: { maxWidth: "100%", margin: 0 }, __source: { fileName: _jsxFileName, lineNumber: 95 }, __self: this },
+                    _react2.default.createElement(_welcomeBar2.default, { __source: { fileName: _jsxFileName, lineNumber: 96 }, __self: this }),
+                    _react2.default.createElement(_NewPost2.default, { __source: { fileName: _jsxFileName, lineNumber: 97 }, __self: this }),
+                    listPosts)));
+
+
+
+    }}exports.default =
+
+
+App;

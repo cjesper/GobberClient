@@ -1,0 +1,160 @@
+'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/var/www/GobBlog/client/src/components/Camera.js';var _react = require('react');var _react2 = _interopRequireDefault(_react);
+var _reactCamera = require('react-camera');var _reactCamera2 = _interopRequireDefault(_reactCamera);
+var _RaisedButton = require('material-ui/RaisedButton');var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+var _Dialog = require('material-ui/Dialog');var _Dialog2 = _interopRequireDefault(_Dialog);
+var _FlatButton = require('material-ui/FlatButton');var _FlatButton2 = _interopRequireDefault(_FlatButton);
+var _camera = require('react-icons/lib/fa/camera');var _camera2 = _interopRequireDefault(_camera);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+class OwnCamera extends _react.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      openDialog: false,
+      show_camera: "block",
+      parent_post: this.props.parent_post };
+
+    this.takePicture = this.takePicture.bind(this);
+    this.openCamera = this.openCamera.bind(this);
+    this.closeCamera = this.closeCamera.bind(this);
+  }
+
+  openCamera() {
+    this.setState({
+      openDialog: true });
+
+  }
+
+  closeCamera() {
+    this.setState({
+      openDialog: false });
+
+  }
+
+  takePicture() {
+    try {
+      this.camera.capture().
+      then(blob => {
+        this.setState({
+          show_camera: "none" });
+
+        this.img.src = URL.createObjectURL(blob);
+        this.img.onload = () => {URL.revokeObjectURL(this.src);};
+        console.log(typeof this.img.src);
+
+        var details = {
+          "nick": "testingImage",
+          "text": "testingImageText",
+          'img': this.img.src };
+
+
+        var formBody = [];
+        for (var property in details) {
+          var encodedKey = encodeURIComponent(property);
+          var encodedValue = encodeURIComponent(details[property]);
+          formBody.push(encodedKey + "=" + encodedValue);
+        }
+        formBody = formBody.join("&");
+        fetch('/newpost', {
+          method: 'post',
+          headers: { 'Content-type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+          body: formBody });
+
+        console.log("Reqd post");
+      });
+
+    } catch (err) {
+      alert("Something is wrong with your camera!");
+    }
+  }
+
+  render() {
+    const actions = [
+    _react2.default.createElement('div', { __source: { fileName: _jsxFileName, lineNumber: 73 }, __self: this },
+      _react2.default.createElement('div', { style: { display: this.state.show_camera }, __source: { fileName: _jsxFileName, lineNumber: 74 }, __self: this },
+        _react2.default.createElement(_reactCamera2.default, {
+          style: style.preview,
+          ref: cam => {
+            this.camera = cam;
+          }, __source: { fileName: _jsxFileName, lineNumber: 75 }, __self: this })),
+
+
+
+      _react2.default.createElement('img', {
+        alt: 'Cam',
+        style: style.captureImage,
+        ref: img => {
+          this.img = img;
+        }, __source: { fileName: _jsxFileName, lineNumber: 83 }, __self: this }),
+
+      _react2.default.createElement(_FlatButton2.default, {
+        label: 'Take pic',
+        primary: true,
+        keyboardFocused: true,
+        onClick: this.takePicture, __source: { fileName: _jsxFileName, lineNumber: 90 }, __self: this }),
+
+      _react2.default.createElement(_FlatButton2.default, {
+        label: 'Done',
+        primary: true,
+        keyboardFocused: true,
+        onClick: this.closeCamera, __source: { fileName: _jsxFileName, lineNumber: 96 }, __self: this }), ',')];
+
+
+
+
+    return (
+      _react2.default.createElement('div', { style: { width: "100%" }, __source: { fileName: _jsxFileName, lineNumber: 106 }, __self: this },
+        _react2.default.createElement(_RaisedButton2.default, {
+          label: 'Open Camera',
+          icon: _react2.default.createElement(_camera2.default, { __source: { fileName: _jsxFileName, lineNumber: 109 }, __self: this }),
+          onClick: this.openCamera, __source: { fileName: _jsxFileName, lineNumber: 107 }, __self: this }),
+
+        _react2.default.createElement(_Dialog2.default, {
+          title: 'Camera',
+          actions: actions,
+          modal: false,
+          contentStyle: { width: '100%', transform: 'translate(0,0)' },
+          bodyStyle: { padding: 0 },
+          style: { paddingTop: 0, height: '100vh', borderTop: 2 },
+          autoDetectWindowHeight: true,
+          autoDetectBodyContent: true,
+          autoScrollBodyContent: true,
+          repositionOnUpdate: true,
+          fullWidth: 'true',
+          open: this.state.openDialog,
+          onRequestClose: this.closeCamera, __source: { fileName: _jsxFileName, lineNumber: 112 }, __self: this })));
+
+
+
+
+  }}exports.default = OwnCamera;
+
+
+
+const style = {
+  preview: {
+    position: 'relative',
+    height: "80%",
+    weight: "100%" },
+
+  captureContainer: {
+    display: 'flex',
+    position: 'absolute',
+    justifyContent: 'center',
+    zIndex: 1,
+    bottom: 0,
+    width: '100%' },
+
+  captureButton: {
+    backgroundColor: 'red',
+    borderRadius: '50%',
+    height: 36,
+    width: 56,
+    color: '#000',
+    margin: 5 },
+
+  captureImage: {
+    position: "relative",
+    zIndex: 100,
+    width: '100%',
+    height: '80%' } };

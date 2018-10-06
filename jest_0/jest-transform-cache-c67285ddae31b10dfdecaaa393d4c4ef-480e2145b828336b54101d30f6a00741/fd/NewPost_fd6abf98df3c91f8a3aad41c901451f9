@@ -1,0 +1,157 @@
+'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/var/www/GobBlog/client/src/components/NewPost.js';var _react = require('react');var _react2 = _interopRequireDefault(_react);
+var _TextField = require('material-ui/TextField');var _TextField2 = _interopRequireDefault(_TextField);
+var _Dialog = require('material-ui/Dialog');var _Dialog2 = _interopRequireDefault(_Dialog);
+var _RaisedButton = require('material-ui/RaisedButton');var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+require('../css/NewPost.css');
+var _Camera = require('./Camera.js');var _Camera2 = _interopRequireDefault(_Camera);
+var _reactFlexboxGrid = require('react-flexbox-grid');function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+class NewPost extends _react2.default.Component {
+  constructor(props) {
+    super(props);this.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    openDialog = () => {
+      this.setState({
+        openDialog: true });
+
+    };this.
+
+    closeDialog = () => {
+      this.setState({
+        openDialog: false });
+
+    };this.
+
+
+
+
+
+
+
+
+
+
+
+
+
+    handleClick = () => {
+
+      var details = {
+        'nick': this.state.nickValue,
+        'text': this.state.textValue };
+
+
+      var formBody = [];
+      for (var property in details) {
+        var encodedKey = encodeURIComponent(property);
+        var encodedValue = encodeURIComponent(details[property]);
+        formBody.push(encodedKey + "=" + encodedValue);
+      }
+      formBody = formBody.join("&");
+      if (this.state.nickValue !== "" && this.state.textValue !== "" &&
+      this.state.passValue === this.state.acceptedPass) {
+        fetch('/newpost', {
+          method: 'post',
+          headers: { 'Content-type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+          body: formBody });
+
+        console.log("Reqd post");
+        this.openDialog();
+        setTimeout(this.closeDialog, 1000);
+        this.setState({
+          nickValue: "",
+          textValue: "" });
+
+      } else {
+        console.log("Nothing to send!");
+      }
+    };this.state = { nickValue: "", textValue: "", passValue: "", imgValue: "", endpoint: "http://127.0.0.1:4001", acceptedPass: "gob", openDialog: false };this.handleTextFieldChange = this.handleTextFieldChange.bind(this);this.handleNickFieldChange = this.handleNickFieldChange.bind(this);this.handlePassFieldChange = this.handlePassFieldChange.bind(this);this.takePicture = this.takePicture.bind(this);}takePicture() {this.camera.capture().then(blob => {this.img.src = URL.createObjectURL(blob);this.img.onload = () => {URL.revokeObjectURL(this.src);};});}handleTextFieldChange(e) {this.setState({ textValue: e.target.value });}handleNickFieldChange(e) {this.setState({ nickValue: e.target.value });}handlePassFieldChange(e) {this.setState({ passValue: e.target.value });} /* Post the new post xd */
+
+  render() {
+    const style = {
+      preview: {
+        position: 'relative' },
+
+      captureContainer: {
+        display: 'flex',
+        position: 'absolute',
+        justifyContent: 'center',
+        zIndex: 1,
+        bottom: 0,
+        width: '100%' },
+
+      captureButton: {
+        backgroundColor: 'red',
+        borderRadius: '50%',
+        height: 56,
+        width: 150,
+        color: '#000',
+        margin: 20 },
+
+      captureImage: {
+        width: '100%' } };
+
+
+
+
+    return (
+      _react2.default.createElement('div', { style: { margin: "10px", width: "100%", borderwidth: "2px" }, __source: { fileName: _jsxFileName, lineNumber: 125 }, __self: this },
+        _react2.default.createElement(_TextField2.default, { type: 'password', value: this.state.passValue, onChange: this.handlePassFieldChange,
+          hintText: 'Passphrase', __source: { fileName: _jsxFileName, lineNumber: 126 }, __self: this }),
+        _react2.default.createElement('br', { __source: { fileName: _jsxFileName, lineNumber: 128 }, __self: this }),
+        _react2.default.createElement(_TextField2.default, { value: this.state.nickValue, onChange: this.handleNickFieldChange,
+          hintText: 'Nick', __source: { fileName: _jsxFileName, lineNumber: 129 }, __self: this }),
+        _react2.default.createElement('br', { __source: { fileName: _jsxFileName, lineNumber: 131 }, __self: this }),
+        _react2.default.createElement(_TextField2.default, { value: this.state.textValue, onChange: this.handleTextFieldChange,
+          hintText: 'Write something, eg G or J.',
+          multiLine: true, __source: { fileName: _jsxFileName, lineNumber: 132 }, __self: this }),
+        _react2.default.createElement('br', { __source: { fileName: _jsxFileName, lineNumber: 135 }, __self: this }),
+        _react2.default.createElement(_reactFlexboxGrid.Row, { style: { width: "100%" }, __source: { fileName: _jsxFileName, lineNumber: 136 }, __self: this },
+          _react2.default.createElement(_reactFlexboxGrid.Col, { xs: 3, __source: { fileName: _jsxFileName, lineNumber: 137 }, __self: this },
+            _react2.default.createElement(_RaisedButton2.default, { onClick: this.handleClick, label: 'GO!', fullWidth: true, __source: { fileName: _jsxFileName, lineNumber: 138 }, __self: this })),
+
+          _react2.default.createElement(_reactFlexboxGrid.Col, { xs: 9, __source: { fileName: _jsxFileName, lineNumber: 140 }, __self: this },
+            _react2.default.createElement(_Camera2.default, { __source: { fileName: _jsxFileName, lineNumber: 141 }, __self: this }, ' Hej '))),
+
+
+        _react2.default.createElement(_Dialog2.default, {
+            title: 'Info',
+            modal: true,
+            open: this.state.openDialog,
+            onRequestClose: this.closeDialog, __source: { fileName: _jsxFileName, lineNumber: 144 }, __self: this }, 'Sent your gob!')));
+
+
+
+
+
+  }}exports.default =
+
+
+NewPost;

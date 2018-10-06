@@ -1,0 +1,84 @@
+'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/var/www/GobBlog/client/src/components/comment.js';var _react = require('react');var _react2 = _interopRequireDefault(_react);
+var _Card = require('material-ui/Card');
+var _Divider = require('material-ui/Divider');var _Divider2 = _interopRequireDefault(_Divider);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+class CommentX extends _react2.default.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            comment_nick: this.props.nick_prop,
+            comment_text: this.props.comment_prop,
+            comment_color: this.props.color_prop,
+            comment_timestamp: this.props.timestamp_prop,
+            comment_timeAgo: "Just now" };
+
+    }
+
+    componentWillMount() {
+        var currTime = Date.now() / 1000;
+        var diff = currTime - this.state.comment_timestamp;
+        console.log(diff);
+        var timeAgo = "Just now";
+        if (diff > 10 && diff < 120) {
+            timeAgo = "Just now";
+        } else if (diff > 120 && diff < 600) {
+            timeAgo = "A few minutes ago";
+        } else if (diff >= 600 && diff < 3600) {
+            timeAgo = "About an hour ago";
+        } else if (diff >= 3600 && diff < 86400) {
+            timeAgo = "A few hours ago";
+        } else if (diff > 86400) {
+            timeAgo = "Days ago";
+        }
+
+        console.log(timeAgo);
+        this.setState({
+            comment_timeAgo: timeAgo });
+
+    }
+
+    render() {
+        const textStyle = {
+            fontColor: "white",
+            padding: "3px",
+            color: "white",
+            textAlign: "center" };
+
+
+        var text = this.state.comment_text;
+        var headerStyle = {
+            fontColor: "white",
+            color: "white",
+            padding: "3px" };
+
+        var cardStyle = {
+            backgroundColor: this.state.comment_color,
+            margin: "2px" };
+
+        return (
+            _react2.default.createElement('div', { __source: { fileName: _jsxFileName, lineNumber: 60 }, __self: this },
+                _react2.default.createElement(_Card.Card, { style: cardStyle, __source: { fileName: _jsxFileName, lineNumber: 61 }, __self: this },
+                    _react2.default.createElement(_Card.CardHeader, {
+                        title: this.state.comment_nick,
+                        subtitle: this.state.comment_timeAgo,
+                        style: headerStyle,
+                        textStyle: headerStyle, __source: { fileName: _jsxFileName, lineNumber: 62 }, __self: this }),
+
+                    _react2.default.createElement(_Divider2.default, { __source: { fileName: _jsxFileName, lineNumber: 68 }, __self: this }),
+                    _react2.default.createElement(_Card.CardText, { style: textStyle, children: text, __source: { fileName: _jsxFileName, lineNumber: 69 }, __self: this }))));
+
+
+
+
+    }}
+
+
+CommentX.defaultProps = {
+    comment_text: "Default",
+    comment_timestamp: "Just now",
+    comment_nick: "Anon",
+    commnet_color: "white" };exports.default =
+
+
+CommentX;
