@@ -53,7 +53,7 @@ export default class Comments extends React.Component {
           formBody.push(encodedKey + "=" + encodedValue);
         }
         formBody = formBody.join("&");
-        fetch('/fetchcomments', {
+        fetch('http://localhost:4001/fetchcomments', {
             method: 'POST',
             headers: {'Content-type': 'application/x-www-form-urlencoded;charset=UTF-8'},
             body: formBody
@@ -118,7 +118,7 @@ export default class Comments extends React.Component {
         }
         formBody = formBody.join("&");
             if (this.state.textValue !== "") {
-                fetch('/newcomment', {
+                fetch('http://localhost:4001/newcomment', {
                     method: 'post',
                     headers: {'Content-type': 'application/x-www-form-urlencoded;charset=UTF-8'},
                     body: formBody

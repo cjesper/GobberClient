@@ -18,7 +18,7 @@ class HashtagX extends React.Component {
           openDialog : true
         })
         
-        var get_url = "/posts?hashtag="+this.state.tag;
+        var get_url = "http://localhost:4001/posts?hashtag="+this.state.tag;
         fetch(get_url, {
             method: 'GET',
             headers: {'Content-type': 'application/x-www-form-urlencoded;charset=UTF-8'},

@@ -26,8 +26,9 @@ class Main extends Component {
             postList: [],
             display_posting_area : false,
             display_new_posts: "none",
-            show_loader : "none"
+            show_loader : "none",
         };
+
         
         var options = {
             forceNew : true,
@@ -36,7 +37,7 @@ class Main extends Component {
             transports:["polling"]
         }
 
-        this.socket = socketIOClient("http://localhost:4001/posts", options);
+        this.socket = socketIOClient("http://localhost:4001")
         
         this.socket.on('allPosts', function (data) {
             addMessage(data); 
@@ -97,7 +98,7 @@ class Main extends Component {
             show_loader: "block"
         });
         this.sendMessage();
-        setTimeout(() => {
+        var int = setTimeout(() => {
             console.log("Aff")
             this.setState({
                 show_loader: "none"
@@ -120,9 +121,7 @@ class Main extends Component {
         formBody.push(encodedKey + "=" + encodedValue);
       }
       formBody = formBody.join("&");
-          axios.get("http://localhost:4001/posts"), {
-              crossdomain : true
-          }
+          axios.get("http://localhost:4001/posts")
           .then(function (res) {
               console.log(res);
               this.setState({

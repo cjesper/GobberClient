@@ -77,7 +77,7 @@ class NewPost extends React.Component {
     }
     componentWillMount() { 
       //Get hashtags for autocomplete
-      fetch('/fetchhashtags', {
+      fetch('http://localhost:4001/fetchhashtags', {
           method: 'GET',
           headers: {'Content-type': 'application/x-www-form-urlencoded;charset=UTF-8'},
       })
@@ -156,7 +156,7 @@ class NewPost extends React.Component {
         formBody = formBody.join("&");
         if (this.state.nickValue !== "" && this.state.textValue !== ""
         && this.state.passValue !== "awdfwajwajiowaji25925929292") {
-            fetch('/newpost', {
+            fetch('http://localhost:4001/newpost', {
                 method: 'post',
                 body: data 
               })
@@ -171,7 +171,7 @@ class NewPost extends React.Component {
             this.props.callback();
         } else {
           console.log("Nothing to send!");
-            }
+        }
     } 
   
     render() {
@@ -221,12 +221,14 @@ class NewPost extends React.Component {
                 dataSource={this.state.hashtags}
                 ref={ref=>this.autocompleteRef=ref}
                 searchText={this.state.searchText}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                 onNewRequest={this.onNewRequest}
                 listStyle={{top: "180px"}}
                 menuStyle={{top: "180px"}}
                 textFieldStyle={{visibility:'hidden'}}
-                style={{position:'absolute',top:'0',left:'0'}}
+                popOverProps={{
+                    canAutoPosition: true
+                }}
+                style={{position:'absolute',top:'100px',left:'0'}}
               />
               <TextField
                 id="my_text_field"
