@@ -214,7 +214,7 @@ class NewPost extends React.Component {
             width : "300px"
         }
         return (
-        <div style={{ display: "block", margin: "10px", width: "100%", borderwidth: "2px", maxWidth: "800px" }}>
+        <div id="newPost" style={{ display: "block", margin: "10px", width: "100%", borderwidth: "2px", maxWidth: "800px" }}>
             <TextField fullWidth={true} value={this.state.nickValue} onChange={this.handleNickFieldChange}
                 hintText="Nick"
             /><br />

@@ -139,11 +139,13 @@ class Main extends Component {
     );
 
     const children = [
-                        <NewPost style={{ zIndex: 1}} 
+                        <NewPost 
+                            style={{ zIndex: 1}} 
                             key={"SomeKey"}
                             socket={this.socket} 
                             callback={this.closeCallback}
-                            />,
+                            />
+                        ,
                     <RaisedButton 
                             key={1241241}
                             label="Close"

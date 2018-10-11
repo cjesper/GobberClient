@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton'
 import Badge from 'material-ui/Badge';
 
+var api_path = "https://gobberapi.carlssonjesper.com"
+
 export default class Gvote extends Component {
     constructor(props) {
         super(props)
@@ -32,7 +34,7 @@ export default class Gvote extends Component {
           formBody.push(encodedKey + "=" + encodedValue);
         }
         formBody = formBody.join("&");
-        fetch('/updatepost', {
+        fetch(api_path + '/updatepost', {
             method: 'post',
             headers: {'Content-type': 'application/x-www-form-urlencoded;charset=UTF-8'},
             body: formBody
