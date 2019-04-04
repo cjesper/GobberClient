@@ -53,7 +53,7 @@ export default class WelcomeBar extends React.Component {
     //Toggle function (open/close Drawer)
     toggleDrawer() {
         this.setState({
-            open: !this.state.open
+            open: false
         })
     }
     openDialog = () => {
