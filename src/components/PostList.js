@@ -130,6 +130,7 @@ export default class PostList extends Component {
 
   render() {
     const posts = this.state.postList;
+    console.log(posts)
     const listPosts = posts.map((post) => 
       <Post key={post._id} nickProp={post.nick} textProp={post.text} colorProp={post.color}
         J_upvoteProp = {post.Jvotes} G_upvoteProp = {post.Gvotes} 

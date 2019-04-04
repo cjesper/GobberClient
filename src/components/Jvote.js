@@ -15,9 +15,9 @@ export default class Jvote extends Component {
 
     give_J = () => {
         if (this.state.allow_j_vote) {
-        var old_J = this.props.J_upvote;
+        var old_J = this.props.j_upvote_prop;
         var new_J = old_J + 1;
-        var old_G = this.props.G_upvote;
+        var old_G = this.props.g_upvote_prop;
         this.setState({
           J_upvote: new_J,
           allow_j_vote : false

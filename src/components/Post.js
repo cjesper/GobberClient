@@ -91,6 +91,7 @@ export default class Post extends React.Component {
     }
   
     render () {
+      console.log(this.state)
         const textStyle = {
             textAlign: "center",
             color : "white",
