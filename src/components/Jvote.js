@@ -15,21 +15,17 @@ export default class Jvote extends Component {
 
     give_J = () => {
         if (this.state.allow_j_vote) {
-        var old_J = this.state.J_upvote;
+        var old_J = this.props.J_upvote;
         var new_J = old_J + 1;
-        var old_G = this.state.G_upvote;
-        var existing_nick = this.props.nickProp;
-        var existing_text = this.props.textProp;
+        var old_G = this.props.G_upvote;
         this.setState({
           J_upvote: new_J,
           allow_j_vote : false
         })
         var details = {
-              'nick': existing_nick,
-              'text': existing_text,
               'Jvotes': new_J,
               'Gvotes' : old_G,
-              'id' : this.state.id
+              'id' : this.props.id_prop
         };
         var formBody = [];
         for (var property in details) {
