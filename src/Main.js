@@ -44,7 +44,6 @@ class Main extends Component {
         });
         
         const updates = data => {
-            console.log(data);
             var id = this.socket.id;
             if (id === data) {
                 console.log("Same!");
