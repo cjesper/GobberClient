@@ -3,7 +3,7 @@ import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton'
 import '../css/NewPost.css'
-import OwnCamera from './Camera.js'
+import NewCamera from './NewCamera.js'
 import {Row, Col} from 'react-flexbox-grid';
 import AutoComplete from 'material-ui/AutoComplete';
 
@@ -248,7 +248,7 @@ class NewPost extends React.Component {
                         <RaisedButton onClick={this.handleClick} primary={true} label="GO!" fullWidth={true} />
                     </Col>
                     <Col xs >
-                        <OwnCamera callbackFromParent={this.camCallback}> Hej </OwnCamera>
+                        <NewCamera callbackFromParent={this.camCallback}> </NewCamera>
                     </Col>
                 </Row>
                 <Dialog
