@@ -158,7 +158,7 @@ export default class Comments extends React.Component {
         />
       <RaisedButton
         style={{marginLeft: "5%"}}
-        label="Done"
+        label="Cancel"
         onClick={this.handleClose}
       />,
     </Row>

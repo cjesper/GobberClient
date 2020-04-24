@@ -46,7 +46,6 @@ class Main extends Component {
         const updates = data => {
             var id = this.socket.id;
             if (id === data) {
-                console.log("Same!");
             } else {
                 this.setState({
                   display_new_posts: "block"
@@ -118,7 +117,6 @@ class Main extends Component {
       formBody = formBody.join("&");
           axios.get(api_path+"/posts")
           .then(function (res) {
-              console.log(res);
               this.setState({
                   postList : res.data 
               })

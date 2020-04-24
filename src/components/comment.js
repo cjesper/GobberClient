@@ -20,7 +20,6 @@ class CommentX extends React.Component {
     componentWillMount() {
         var currTime = Date.now() / 1000; 
         var diff = (currTime - this.state.comment_timestamp);
-        console.log(diff);
         var timeAgo = "Just now";
         if (diff > 10 && diff < 120) {
             timeAgo = "Just now"
@@ -33,8 +32,6 @@ class CommentX extends React.Component {
         } else if (diff > 86400) {
             timeAgo = "Days ago"
         }
-
-        console.log(timeAgo)
         this.setState({
             comment_timeAgo : timeAgo 
         })

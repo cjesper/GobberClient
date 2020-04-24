@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton'
 import Badge from 'material-ui/Badge';
 
-var api_path = "https://gobberapi.jespercarlsson.com"
+var api_path = "http://gobberapi.jespercarlsson.com"
 
 export default class Jvote extends Component {
     constructor(props) {

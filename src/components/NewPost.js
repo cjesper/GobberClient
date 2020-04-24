@@ -31,11 +31,9 @@ class NewPost extends React.Component {
     } 
     
     camCallback = (dataFromChild) => {
-      this.setState({
-            blobData : dataFromChild,
-            preview_image : URL.createObjectURL(dataFromChild),
-            show_preview: "block"
-      })
+			this.setState({
+				blobData : dataFromChild
+			})
     }
 
     myTextChange=(event)=>{
@@ -91,7 +89,6 @@ class NewPost extends React.Component {
             var newtag = "#" + json[i].hashtag;
             this.state.hashtags.push(newtag)
           }
-          console.log(this.state.hashtags);
         }.bind(this))
         .catch((error) => {
           console.log(error);
@@ -100,7 +97,6 @@ class NewPost extends React.Component {
 
     //initiate image removal
     init_image_remove = () => {
-      console.log("Hi!");
       this.setState({
         show_image_confirm : true
       });
@@ -114,7 +110,6 @@ class NewPost extends React.Component {
           show_preview : "none",
           show_image_confirm : false
       }) 
-      console.log(this.state);
     }
 
     abort_remove_image = () => {
@@ -137,9 +132,9 @@ class NewPost extends React.Component {
       /* Post the new post xd */
     handleClick = () => {
         var data = new FormData();
-	if (this.state.blobData !== null) {
-	    data.append('pic', this.state.blobData, 'blobby.jpg');
-	}
+				if (this.state.blobData !== null) {
+					data.append('pic', this.state.blobData, 'blobby.jpg');
+				}
         data.append('nick', this.state.nickValue);
         data.append('text', this.state.textValue);
         data.append('socket_id', this.state.socket.id);

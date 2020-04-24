@@ -9,6 +9,7 @@ export default class NewCamera extends Component {
 
   constructor(props) {
     super(props);
+			this.fileInput = React.createRef() // ref to fileInput
       this.state={
         openDialog: false,
         show_camera: "block",
@@ -17,6 +18,7 @@ export default class NewCamera extends Component {
         image: "",
         blob: ""
       }
+
     this.takePicture = this.takePicture.bind(this);
     this.openCamera = this.openCamera.bind(this);
     this.closeCamera = this.closeCamera.bind(this);
@@ -47,10 +49,6 @@ export default class NewCamera extends Component {
           this.img.src = URL.createObjectURL(blob);
           this.img.onload = () => { URL.revokeObjectURL(this.src); }
          
-          this.props.callbackFromParent(blob);
-          var myblob = new Blob(["This is for testing"], {type: "image/jpg"});
-          var data = new FormData();
-          data.append('pic', blob, 'blobby.jpg');
           }
         )
     } catch (err) {
@@ -60,22 +58,33 @@ export default class NewCamera extends Component {
 
   chooseImage = () => {
     var self = this
-    console.log("here!")
+    console.log("Chose image!")
     let selected_image = document.getElementById('choose_image_input').files[0];
     if (selected_image) {
+			console.log(selected_image)
       var reader  = new FileReader();
       reader.onload = function(e)  {
+
         var image = document.createElement("img");
         image.src = e.target.result;
         self.setState({
             input_image : image.src
-          })
+				})
        }
-       reader.readAsDataURL(selected_image)
+			reader.readAsDataURL(selected_image)
+			self.props.callbackFromParent(selected_image)
     }
   }
 
+
+	triggerInputFile = () => {
+		console.log("Aff");
+		if (this.fileInput.current != undefined && this.fileInput.current.click != undefined)
+			this.fileInput.current.click()
+	}
+
   render() {
+
     const style = {
       preview: {
         position: 'relative',
@@ -134,12 +143,11 @@ export default class NewCamera extends Component {
 
     return (
       <div style={{width: "100%"}}>
-        <div style={{height: "36px", display: "flex", justifyContent: "center", border : "1px solid black"}} >
-          <FaCamera />
-          <label for="choose_image_input">Add image</label>
-          <input style={{opacity:"0", zIndex:-1, position: "relative", top: "15%", left: "25%"}} type="file" id="choose_image_input" onChange={this.chooseImage} />
+        <div style={{height: "36px", display: "flex", alignItems: "center"}} >
+					<RaisedButton primary={true} label="Take Pic!" fullWidth={true} onClick={this.triggerInputFile}> <FaCamera /> </RaisedButton>
+          <input style={{opacity:"0", zIndex:-1, position: "relative", top: "15%", left: "25%"}} type="file" id="choose_image_input" onChange={this.chooseImage} ref={this.fileInput}/>
         </div>
-        <div id="chosen_image_div">
+        <div id="chosen_image_div" style={{display:"flex", alignItems:"center"}}>
           <img src={this.state.input_image} />
         </div>
         <Dialog

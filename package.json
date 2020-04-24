@@ -17,6 +17,7 @@
     "react-fastclick": "^3.0.2",
     "react-flexbox-grid": "^2.0.0",
     "react-fontawesome": "^1.6.1",
+    "react-html5-camera-photo": "^1.5.4",
     "react-icons": "^2.2.7",
     "react-image-file": "^0.3.0",
     "react-router": "^4.2.0",

@@ -125,7 +125,7 @@ export default class Post extends React.Component {
                 <Divider />
                 <CardText style={textStyle} >
                     <div >
-                        <img style={{display: this.state.image_exists, width : "100%", height: "200px", borderRadius: "10%"}} src={this.state.image_src} alt="aff" />
+                        <img style={{display: this.state.image_exists, width : "100%", height: "200px", borderRadius: "1%"}} src={this.state.image_src} alt="aff" />
                         {reactStringReplace(this.state.textProp, /#(\w+)/g, (match, i) => (
                             <HashtagX key={match + i} text_prop={match}> </HashtagX>
                         ))} 
