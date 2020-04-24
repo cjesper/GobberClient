@@ -7,7 +7,7 @@ import OwnCamera from './Camera.js'
 import {Row, Col} from 'react-flexbox-grid';
 import AutoComplete from 'material-ui/AutoComplete';
 
-var api_path = "https://gobberapi.carlssonjesper.com"
+var api_path = "http://gobberapi.jespercarlsson.com"
 
 class NewPost extends React.Component {
     constructor(props) {
