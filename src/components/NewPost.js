@@ -137,7 +137,9 @@ class NewPost extends React.Component {
       /* Post the new post xd */
     handleClick = () => {
         var data = new FormData();
-        data.append('pic', this.state.blobData, 'blobby.jpg');
+	if (this.state.blobData !== null) {
+	    data.append('pic', this.state.blobData, 'blobby.jpg');
+	}
         data.append('nick', this.state.nickValue);
         data.append('text', this.state.textValue);
         data.append('socket_id', this.state.socket.id);

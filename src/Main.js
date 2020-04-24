@@ -164,7 +164,7 @@ class Main extends Component {
     }
 
     const paperChildren = [
-        <img src="https://png.icons8.com/metro/50/000000/pencil.png" 
+	<img src="https://img.icons8.com/ios/50/000000/pencil.png"
           style={{
             position: "absolute",
             left: "10px",
@@ -172,6 +172,8 @@ class Main extends Component {
           }}
         />
     ]
+
+
     return (
         <MuiThemeProvider>
             <div style={{maxWidth: "100%", zIndex: 1, position: "relative", margin: "auto"}}>

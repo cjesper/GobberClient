@@ -35,6 +35,7 @@ export default class OwnCamera extends Component {
     }
 
   takePicture() {
+		console.log("Taking pic")
     try {
         this.camera.capture()
         .then(blob => {
@@ -54,6 +55,7 @@ export default class OwnCamera extends Component {
           }
         )
     } catch (err) {
+				console.log(err)
         alert("Something is wrong with your camera!");
     }
     
