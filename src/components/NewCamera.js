@@ -144,7 +144,7 @@ export default class NewCamera extends Component {
     return (
       <div style={{width: "100%"}}>
         <div style={{height: "36px", display: "flex", alignItems: "center"}} >
-					<RaisedButton primary={true} label="Take Pic!" fullWidth={true} onClick={this.triggerInputFile}> <FaCamera /> </RaisedButton>
+					<RaisedButton primary={false} label="Take Pic!" fullWidth={true} onClick={this.triggerInputFile}> <FaCamera /> </RaisedButton>
           <input style={{opacity:"0", zIndex:-1, position: "relative", top: "15%", left: "25%"}} type="file" id="choose_image_input" onChange={this.chooseImage} ref={this.fileInput}/>
         </div>
         <div id="chosen_image_div" style={{display:"flex", alignItems:"center"}}>

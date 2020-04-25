@@ -40,7 +40,6 @@ export default class Gvote extends Component {
             body: formBody
           })
         } else {
-          console.log("Already given G-vote!")
         }
     }
 

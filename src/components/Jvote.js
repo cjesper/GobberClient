@@ -40,7 +40,6 @@ export default class Jvote extends Component {
                     body: formBody
                   })
       } else {
-        console.log("Already given j-vote");
       }
     } 
 

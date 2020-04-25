@@ -67,7 +67,7 @@ export default class Post extends React.Component {
         var all = time(diff);
         var hoursAgo = all.slice(0,2); 
         if (parseInt(hoursAgo, 10) > 0) {
-            timeString = timeString + hoursAgo + 'h';
+            timeString = timeString + hoursAgo + 'h ';
         }
         var minutesAgo = all.slice(4,5);
         if (parseInt(minutesAgo, 10) > 0) {
@@ -92,9 +92,8 @@ export default class Post extends React.Component {
   
     render () {
         const textStyle = {
-            textAlign: "center",
+            textAlign: "left",
             color : "white",
-            fontFamily: "Helvetica",
             padding: 10
         };
 
@@ -125,10 +124,10 @@ export default class Post extends React.Component {
                 <Divider />
                 <CardText style={textStyle} >
                     <div >
-                        <img style={{display: this.state.image_exists, width : "100%", height: "200px", borderRadius: "1%"}} src={this.state.image_src} alt="aff" />
                         {reactStringReplace(this.state.textProp, /#(\w+)/g, (match, i) => (
                             <HashtagX key={match + i} text_prop={match}> </HashtagX>
                         ))} 
+                        <img style={{display: this.state.image_exists, marginTop:"1%", width : "100%", height: "200px", borderRadius: "1%"}} src={this.state.image_src} alt="aff" />
                     </div>
                 </CardText>
                 <Divider />

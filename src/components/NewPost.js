@@ -242,7 +242,7 @@ class NewPost extends React.Component {
                 <Row style={{width: "100%"}}> 
                         <img onClick={this.init_image_remove} style={{display: this.state.show_preview, width: "100%", height:"200px"}}src={this.state.preview_image} alt="N" />
                     <Col xs >
-                        <RaisedButton onClick={this.handleClick} primary={true} label="GO!" fullWidth={true} />
+                        <RaisedButton onClick={this.handleClick} primary={true} label="Gob" fullWidth={true} />
                     </Col>
                     <Col xs >
                         <NewCamera callbackFromParent={this.camCallback}> </NewCamera>
