@@ -42,7 +42,7 @@ class CommentX extends React.Component {
             fontColor: "white",
             padding: "3px",
             color: "white",
-            textAlign: "center",
+            textAlign: "left",
         };
         
         var text = this.state.comment_text;

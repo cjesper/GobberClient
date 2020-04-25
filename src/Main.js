@@ -162,13 +162,15 @@ class Main extends Component {
     }
 
     const paperChildren = [
-	<img src="https://img.icons8.com/ios/50/000000/pencil.png"
+      <div>
+      <img src="https://img.icons8.com/ios/50/000000/pencil.png"
           style={{
             position: "absolute",
             left: "10px",
             top: "5px"
           }}
         />
+      </div>
     ]
 
 
@@ -187,7 +189,7 @@ class Main extends Component {
                       repositionOnUpdate={false}
                       style={{
                           width: "100%", 
-                          maxWidth : "800px",
+                          maxWidth : "100%",
                           height: "100%",
                           position: 'fixed',
                       }}
@@ -197,11 +199,12 @@ class Main extends Component {
                           textAlign: "center", 
                           padding:0,
                           fontFamily: "Caveat"}}
-                      contentStyle={{width: "100%", maxWidth: "none", 
-                                    height: "100%", maxHeight: "none",
-                                    marginTop: "-160px", padding:2,
-                                    overflowY: "auto"}}
-                      fullWidth="true"
+                          contentStyle={{
+                              width: "100%", 
+                              height:"100%", 
+                              marginTop: "-160px", padding:2,
+                              overflowY: "auto"}}
+                          fullWidth="true"
                     >
                     </Dialog>
                 <i style={{display: this.state.show_loader, position: "absolute", zIndex: 10, marginLeft : "45%", marginTop: "45%", fontSize: "36px"}} className="fa fa-spinner fa-spin"> </i>
